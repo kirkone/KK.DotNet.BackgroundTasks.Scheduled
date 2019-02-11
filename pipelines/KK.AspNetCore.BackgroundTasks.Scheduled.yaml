@@ -1,0 +1,88 @@
+# https://docs.microsoft.com/en-us/azure/devops/pipelines/yaml-schema?view=azure-devops
+
+trigger:
+  batch: true
+  branches:
+    include:
+      - master
+
+pr:
+  autoCancel: true
+  branches:
+    include:
+      - master
+
+queue:
+  name: Hosted
+
+variables:
+  BuildConfiguration: "Release"
+  Project: "$(Build.SourcesDirectory)/src/KK.AspNetCore.BackgroundTasks.Scheduled/KK.AspNetCore.BackgroundTasks.Scheduled.csproj"
+  ProjectFolder: "$(Build.SourcesDirectory)/src/KK.AspNetCore.BackgroundTasks.Scheduled"
+  DotNetVersion: "2.2.103"
+  GitVersion: "4.0.1-beta1-62"
+
+name: $(Year:yy)$(DayOfYear)$(Rev:rr)
+
+steps:
+  - task: DotNetCoreInstaller@0
+    displayName: Use .NET Core sdk $(DotNetVersion)
+    inputs:
+      packageType: "sdk"
+      version: $(DotNetVersion)
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Install GitVersion: $(GitVersion)'
+    inputs:
+      command: custom
+      custom: 'tool'
+      arguments: 'install GitVersion.Tool --version $(GitVersion)  --tool-path .\pipelines\tools\Gitversion'
+
+  - task: PowerShell@2
+    displayName: Run GitVersion
+    inputs:
+      targetType: "filePath"
+      filePath: "Pipelines/tools/Run-GitVersion.ps1"
+      workingDirectory: "$(ProjectFolder)"
+
+  - task: DotNetCoreCLI@2
+    displayName: Restore
+    inputs:
+      command: "restore"
+      projects: "$(Project)"
+
+  - task: DotNetCoreCLI@2
+    displayName: Build
+    inputs:
+      command: "build"
+      projects: "$(Project)"
+      arguments: "--configuration $(buildConfiguration)"
+
+  - task: DotNetCoreCLI@2
+    displayName: Pack Internal
+    inputs:
+      command: "pack"
+      packagesToPack: "$(Project)"
+      nobuild: true
+      arguments: "--configuration $(buildConfiguration)"
+      buildProperties: "VersionPrefix=$(GitVersion.MajorMinorPatch);VersionSuffix=pre-$(Build.BuildNumber)"
+      packDirectory: "$(Build.ArtifactStagingDirectory)"
+      verbosityPack: Normal
+
+  - task: DotNetCoreCLI@2
+    displayName: Pack Release
+    inputs:
+      command: "pack"
+      packagesToPack: "$(Project)"
+      nobuild: true
+      arguments: "--configuration $(buildConfiguration)"
+      buildProperties: "VersionPrefix=$(GitVersion.MajorMinorPatch);VersionSuffix="
+      packDirectory: "$(Build.ArtifactStagingDirectory)"
+      verbosityPack: Normal
+
+  - task: PublishBuildArtifacts@1
+    displayName: Publish Artifact
+    inputs:
+      pathtoPublish: "$(Build.ArtifactStagingDirectory)"
+      artifactName: NuGet
+      parallel: true
