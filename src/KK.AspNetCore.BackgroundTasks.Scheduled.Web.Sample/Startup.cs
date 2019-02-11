@@ -35,10 +35,16 @@ namespace KK.AspNetCore.BackgroundTasks.Sample
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            // Begin - Scheduled Tast Setup
+
+            // Add an configuration object to the DI
+            // The type parameter should be the type of the target task
             services.AddSingleton<IScheduledTaskOptions<SampleTask>>(
                 new ScheduledTaskOptions<SampleTask>
                 {
+                    // A CronTab expression, see: https://en.wikipedia.org/wiki/Cron
                     Schedule = "*/10 * * * * *",
+                    // Seconds are only supported when it is set explicit
                     CronFormat = Cronos.CronFormat.IncludeSeconds
                 }
             );
@@ -46,14 +52,19 @@ namespace KK.AspNetCore.BackgroundTasks.Sample
             services.AddSingleton<IScheduledTaskOptions<SuperSampleTask>>(
                 new ScheduledTaskOptions<SuperSampleTask>
                 {
-                    Schedule = "*/20 * * * * *",
-                    CronFormat = Cronos.CronFormat.IncludeSeconds
+                    Schedule = "*/1 * * * *"
                 }
             );
             
+            // Setup the Task
             services.AddScheduledTask<SampleTask>();
             services.AddScheduledTask<SuperSampleTask>();
+
+            // Setup the Host for the scheduled tasks
+            // without this the tasks will never run.
             services.AddHostedService<SchedulerHostedService>();
+
+            // End - Scheduled Tast Setup
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
