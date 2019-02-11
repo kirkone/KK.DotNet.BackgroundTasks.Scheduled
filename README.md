@@ -82,7 +82,7 @@ services.AddHostedService<SchedulerHostedService>();
 | Feed | Name | Status |
 | --- | --- | --- |
 | NuGet.org | [KK.AspNetCore.BackgroundTasks.Scheduled](https://www.nuget.org/packages/KK.AspNetCore.BackgroundTasks.Scheduled/) | [![NuGet Badge](https://img.shields.io/nuget/v/KK.AspNetCore.BackgroundTasks.Scheduled.svg)](https://www.nuget.org/packages/KK.AspNetCore.BackgroundTasks.Scheduled/) |
-| Azure DevOps | [KK.AspNetCore.BackgroundTasks.Scheduled](https://dev.azure.com/kirkone/KK.AspNetCore.BackgroundTasks.Scheduled/_packaging?_a=feed&feed=KK.AspNetCore.BackgroundTasks.Scheduled) | [![Azure DevOps Badge](https://feeds.dev.azure.com/kirkone/_apis/public/Packaging/Feeds/f4e630de-e443-40d4-9178-10f439864c4f/Packages/8747b0c5-d2c0-4ed5-b7b2-ef9f363cd98b/Badge)](https://dev.azure.com/kirkone/KK.AspNetCore.BackgroundTasks.Scheduled/_packaging?_a=package&feed=f4e630de-e443-40d4-9178-10f439864c4f&package=8747b0c5-d2c0-4ed5-b7b2-ef9f363cd98b&preferRelease=true) |
+| Azure DevOps | [KK.AspNetCore.BackgroundTasks.Scheduled](https://feeds.dev.azure.com/kirkone/_apis/public/Packaging/Feeds/70450bc2-9936-4d1b-b153-be005873090e/Packages/8fe0297c-06a6-43c4-a8ba-f897ea6ef494/Badge) | [![Azure DevOps Badge](https://feeds.dev.azure.com/kirkone/_apis/public/Packaging/Feeds/70450bc2-9936-4d1b-b153-be005873090e/Packages/8fe0297c-06a6-43c4-a8ba-f897ea6ef494/Badge)](https://dev.azure.com/kirkone/KK.AspNetCore.BackgroundTasks.Scheduled/_packaging?_a=package&feed=70450bc2-9936-4d1b-b153-be005873090e&package=8fe0297c-06a6-43c4-a8ba-f897ea6ef494&preferRelease=true) |
 
 You can add the package for example with the following `dotnet` command:
 
@@ -98,7 +98,7 @@ The build environment for this project is on Azure DevOps and can be found here 
 
 | Name | Status |
 | --- | --- |
-| KK.AspNetCore.BackgroundTasks.Scheduled CI | [![Build Status](https://dev.azure.com/kirkone/KK.AspNetCore.BackgroundTasks.Scheduled/_apis/build/status/KK.AspNetCore.BackgroundTasks.Scheduled%20CI?branchName=master)](https://dev.azure.com/kirkone/KK.AspNetCore.BackgroundTasks.Scheduled/_build/latest?definitionId=28&branchName=master) |
+| KK.AspNetCore.BackgroundTasks.Scheduled CI | [![Build Status](https://dev.azure.com/kirkone/KK.AspNetCore.BackgroundTasks.Scheduled/_apis/build/status/KK.AspNetCore.BackgroundTasks.Scheduled%20CI?branchName=master)](https://dev.azure.com/kirkone/KK.AspNetCore.BackgroundTasks.Scheduled/_build/latest?definitionId=30&branchName=master) |
 
 #### Release
 
