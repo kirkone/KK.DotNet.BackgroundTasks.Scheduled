@@ -12,7 +12,7 @@ You can add multiple tasks in your projekt. The task has to implement the `ISche
 The options for the task are provided by the DI system and you can request the options with `IScheduledTaskOptions<SampleTask>` as shown below.  
 The `ExecuteAsync` Method will be executed when the task is triggert.
 
-```
+```C#
 public class SampleTask : IScheduledTask
 {
     public SampleTask(
@@ -35,14 +35,14 @@ public class SampleTask : IScheduledTask
 
 You have to register the task in your `public void ConfigureServices` of the `Startup.cs`. You can use the provided `AddScheduledTask` Method:
 
-```
+```C#
 services.AddScheduledTask<SampleTask>();
 ```
 
 The Task will be added as a `Singleton` with this method.  
 If you does not want this you can also register it by yourself:
 
-```
+```C#
 services.AddScoped<IScheduledTask, SampleTask>();
 ```
 
@@ -58,7 +58,7 @@ The options are provided as an `IScheduledTaskOptions` of type `YourSampleTask` 
 
 In your `public void ConfigureServices` of the `Startup.cs` you can add options like so:
 
-```
+```C#
 services.AddSingleton<IScheduledTaskOptions<SampleTask>>(
     new ScheduledTaskOptions<SampleTask>
     {
@@ -73,7 +73,7 @@ services.AddSingleton<IScheduledTaskOptions<SampleTask>>(
 **After** the registration of all your tasks there is only one thing left to do.  
 Register the `SchedulerHostedService` like so:
 
-```
+```C#
 services.AddHostedService<SchedulerHostedService>();
 ```
 
@@ -86,7 +86,7 @@ services.AddHostedService<SchedulerHostedService>();
 
 You can add the package for example with the following `dotnet` command:
 
-```
+```Shell
 dotnet add package KK.AspNetCore.BackgroundTasks.Scheduled
 ```
 
