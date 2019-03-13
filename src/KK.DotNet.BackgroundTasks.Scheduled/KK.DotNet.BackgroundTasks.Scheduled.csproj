@@ -6,9 +6,9 @@
 
   <PropertyGroup>
     <Authors>Kirsten Kluge</Authors>
-    <PackageProjectUrl>https://github.com/kirkone/KK.AspNetCore.BackgroundTasks.Scheduled</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/kirkone/KK.AspNetCore.BackgroundTasks.Scheduled</RepositoryUrl>
-    <Description>This project contains the code for the NuGet Package to get scheduled tasks in an asp.net core application.</Description>
+    <PackageProjectUrl>https://github.com/kirkone/KK.DotNet.BackgroundTasks.Scheduled</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/kirkone/KK.DotNet.BackgroundTasks.Scheduled</RepositoryUrl>
+    <Description>This project contains the code for the NuGet Package to get scheduled tasks in an dotnet core application.</Description>
     <Copyright>MIT</Copyright>
   </PropertyGroup>
 

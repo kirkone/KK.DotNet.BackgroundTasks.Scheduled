@@ -13,7 +13,7 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\KK.AspNetCore.BackgroundTasks.Scheduled\KK.AspNetCore.BackgroundTasks.Scheduled.csproj" />
+    <ProjectReference Include="..\KK.DotNet.BackgroundTasks.Scheduled\KK.DotNet.BackgroundTasks.Scheduled.csproj" />
   </ItemGroup>
 
 </Project>

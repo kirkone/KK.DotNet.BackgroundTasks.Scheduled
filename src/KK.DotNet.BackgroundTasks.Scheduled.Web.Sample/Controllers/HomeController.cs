@@ -4,10 +4,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using KK.AspNetCore.BackgroundTasks.Sample.Models;
+using KK.DotNet.BackgroundTasks.Sample.Models;
 using Microsoft.Extensions.Logging;
 
-namespace KK.AspNetCore.BackgroundTasks.Sample.Controllers
+namespace KK.DotNet.BackgroundTasks.Sample.Controllers
 {
     public class HomeController : Controller
     {

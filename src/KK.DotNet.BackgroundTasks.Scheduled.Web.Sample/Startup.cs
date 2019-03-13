@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using KK.AspNetCore.BackgroundTasks.Scheduled;
+using KK.DotNet.BackgroundTasks.Scheduled;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace KK.AspNetCore.BackgroundTasks.Sample
+namespace KK.DotNet.BackgroundTasks.Sample
 {
     public class Startup
     {

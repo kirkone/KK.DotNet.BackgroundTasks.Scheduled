@@ -5,9 +5,9 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7E682FEA-3201-4830-BD41-6260DA4C03D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KK.AspNetCore.BackgroundTasks.Scheduled", "src\KK.AspNetCore.BackgroundTasks.Scheduled\KK.AspNetCore.BackgroundTasks.Scheduled.csproj", "{57BB4613-E586-4254-8F01-DC7A27494567}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KK.DotNet.BackgroundTasks.Scheduled", "src\KK.DotNet.BackgroundTasks.Scheduled\KK.DotNet.BackgroundTasks.Scheduled.csproj", "{57BB4613-E586-4254-8F01-DC7A27494567}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KK.AspNetCore.BackgroundTasks.Scheduled.Web.Sample", "src\KK.AspNetCore.BackgroundTasks.Scheduled.Web.Sample\KK.AspNetCore.BackgroundTasks.Scheduled.Web.Sample.csproj", "{0FC375DB-728A-4D99-9B6E-16FF1ABBD5D8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KK.DotNet.BackgroundTasks.Scheduled.Web.Sample", "src\KK.DotNet.BackgroundTasks.Scheduled.Web.Sample\KK.DotNet.BackgroundTasks.Scheduled.Web.Sample.csproj", "{0FC375DB-728A-4D99-9B6E-16FF1ABBD5D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

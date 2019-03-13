@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace KK.AspNetCore.BackgroundTasks.Sample
+namespace KK.DotNet.BackgroundTasks.Sample
 {
     public class Program
     {

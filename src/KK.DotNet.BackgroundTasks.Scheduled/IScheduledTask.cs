@@ -1,4 +1,4 @@
-﻿namespace KK.AspNetCore.BackgroundTasks.Scheduled
+﻿namespace KK.DotNet.BackgroundTasks.Scheduled
 {
     using System.Threading;
     using System.Threading.Tasks;

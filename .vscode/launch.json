@@ -10,9 +10,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/src/KK.AspNetCore.BackgroundTasks.Sample/bin/Debug/netcoreapp2.2/KK.AspNetCore.BackgroundTasks.Sample.dll",
+            "program": "${workspaceFolder}/src/KK.DotNet.BackgroundTasks.Scheduled.Web.Sample/bin/Debug/netcoreapp2.2/KK.DotNet.BackgroundTasks.Scheduled.Web.Sample.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/src/KK.AspNetCore.BackgroundTasks.Sample",
+            "cwd": "${workspaceFolder}/src/KK.DotNet.BackgroundTasks.Scheduled.Web.Sample",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart",
             "launchBrowser": {

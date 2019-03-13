@@ -17,9 +17,9 @@ queue:
 
 variables:
   BuildConfiguration: "Release"
-  Project: "$(Build.SourcesDirectory)/src/KK.AspNetCore.BackgroundTasks.Scheduled/KK.AspNetCore.BackgroundTasks.Scheduled.csproj"
-  ProjectFolder: "$(Build.SourcesDirectory)/src/KK.AspNetCore.BackgroundTasks.Scheduled"
-  DotNetVersion: "2.2.103"
+  Project: "$(Build.SourcesDirectory)/src/KK.DotNet.BackgroundTasks.Scheduled/KK.DotNet.BackgroundTasks.Scheduled.csproj"
+  ProjectFolder: "$(Build.SourcesDirectory)/src/KK.DotNet.BackgroundTasks.Scheduled"
+  DotNetVersion: "2.2.105"
   GitVersion: "4.0.1-beta1-62"
 
 name: $(Year:yy)$(DayOfYear)$(Rev:rr)

@@ -1,10 +1,10 @@
-# KK.AspNetCore.BackgroundTasks.Scheduled
+# KK.DotNet.BackgroundTasks.Scheduled
 
 This project contains the code for the NuGet Package to get scheduled tasks in an asp.net core application.  
 
 ## Usage
 
-> **INFO**: For detailed usage information please have a look in the `KK.AspNetCore.BackgroundTasks.Scheduled.Web.Sample` project.
+> **INFO**: For detailed usage information please have a look in the `KK.DotNet.BackgroundTasks.Scheduled.Web.Sample` project.
 
 ### Task
 
@@ -81,33 +81,33 @@ services.AddHostedService<SchedulerHostedService>();
 
 | Feed | Name | Status |
 | --- | --- | --- |
-| NuGet.org | [KK.AspNetCore.BackgroundTasks.Scheduled](https://www.nuget.org/packages/KK.AspNetCore.BackgroundTasks.Scheduled/) | [![NuGet Badge](https://img.shields.io/nuget/v/KK.AspNetCore.BackgroundTasks.Scheduled.svg)](https://www.nuget.org/packages/KK.AspNetCore.BackgroundTasks.Scheduled/) |
-| Azure DevOps | [KK.AspNetCore.BackgroundTasks.Scheduled](https://feeds.dev.azure.com/kirkone/_apis/public/Packaging/Feeds/70450bc2-9936-4d1b-b153-be005873090e/Packages/8fe0297c-06a6-43c4-a8ba-f897ea6ef494/Badge) | [![Azure DevOps Badge](https://feeds.dev.azure.com/kirkone/_apis/public/Packaging/Feeds/70450bc2-9936-4d1b-b153-be005873090e/Packages/8fe0297c-06a6-43c4-a8ba-f897ea6ef494/Badge)](https://dev.azure.com/kirkone/KK.AspNetCore.BackgroundTasks.Scheduled/_packaging?_a=package&feed=70450bc2-9936-4d1b-b153-be005873090e&package=8fe0297c-06a6-43c4-a8ba-f897ea6ef494&preferRelease=true) |
+| NuGet.org | [KK.DotNet.BackgroundTasks.Scheduled](https://www.nuget.org/packages/KK.DotNet.BackgroundTasks.Scheduled/) | [![NuGet Badge](https://img.shields.io/nuget/v/KK.DotNet.BackgroundTasks.Scheduled.svg)](https://www.nuget.org/packages/KK.DotNet.BackgroundTasks.Scheduled/) |
+| Azure DevOps | [KK.DotNet.BackgroundTasks.Scheduled](https://dev.azure.com/kirkone/KK.DotNet.BackgroundTasks.Scheduled/_packaging?_a=package&feed=70450bc2-9936-4d1b-b153-be005873090e&package=f46d7f0d-1a7b-4006-8177-46359dcf8ad5) | [![KK.DotNet.BackgroundTasks.Scheduled package in KK.DotNet.BackgroundTasks.Scheduled feed in Azure Artifacts](https://feeds.dev.azure.com/kirkone/_apis/public/Packaging/Feeds/d2b0f7d3-06ab-484c-84ed-49af019c20c0/Packages/26191217-af92-48b4-ab59-8ce125f02723/Badge)](https://dev.azure.com/kirkone/KK.DotNet.BackgroundTasks.Scheduled/_packaging?_a=package&feed=d2b0f7d3-06ab-484c-84ed-49af019c20c0&package=26191217-af92-48b4-ab59-8ce125f02723&preferRelease=true) |
 
 You can add the package for example with the following `dotnet` command:
 
 ```Shell
-dotnet add package KK.AspNetCore.BackgroundTasks.Scheduled
+dotnet add package KK.DotNet.BackgroundTasks.Scheduled
 ```
 
 Pre-releases of this Package are pushed to an internal feed an Azure DevOps. There is no public access to this feeds at the moment.
 
-The build environment for this project is on Azure DevOps and can be found here [dev.azure.com/kirkone/KK.AspNetCore.BackgroundTasks.Scheduled](https://dev.azure.com/kirkone/KK.AspNetCore.BackgroundTasks.Scheduled/_build)
+The build environment for this project is on Azure DevOps and can be found here [dev.azure.com/kirkone/KK.DotNet.BackgroundTasks.Scheduled](https://dev.azure.com/kirkone/KK.DotNet.BackgroundTasks.Scheduled/_build)
 
 #### Build
 
 | Name | Status |
 | --- | --- |
-| KK.AspNetCore.BackgroundTasks.Scheduled CI | [![Build Status](https://dev.azure.com/kirkone/KK.AspNetCore.BackgroundTasks.Scheduled/_apis/build/status/KK.AspNetCore.BackgroundTasks.Scheduled%20CI?branchName=master)](https://dev.azure.com/kirkone/KK.AspNetCore.BackgroundTasks.Scheduled/_build/latest?definitionId=30&branchName=master) |
+| KK.DotNet.BackgroundTasks.Scheduled CI | [![Build Status](https://dev.azure.com/kirkone/KK.DotNet.BackgroundTasks.Scheduled/_apis/build/status/KK.DotNet.BackgroundTasks.Scheduled%20CI?branchName=master)](https://dev.azure.com/kirkone/KK.DotNet.BackgroundTasks.Scheduled/_build/latest?definitionId=30&branchName=master) |
 
 #### Release
 
 | Name | Status |
 | --- | --- |
-| KK.AspNetCore.BackgroundTasks.Scheduled CD | |
-| Alpha | [![Alpha](https://vsrm.dev.azure.com/kirkone/_apis/public/Release/badge/b1423fc9-d9b5-4555-8599-ff7a1fdea8f9/2/2)](https://dev.azure.com/kirkone/KK.AspNetCore.BackgroundTasks.Scheduled/_release?view=all&definitionId=2&_a=releases) |
-| Beta | [![Beta](https://vsrm.dev.azure.com/kirkone/_apis/public/Release/badge/b1423fc9-d9b5-4555-8599-ff7a1fdea8f9/2/3)](https://dev.azure.com/kirkone/KK.AspNetCore.BackgroundTasks.Scheduled/_release?view=all&definitionId=2&_a=releases) |
-| Release | [![Release](https://vsrm.dev.azure.com/kirkone/_apis/public/Release/badge/b1423fc9-d9b5-4555-8599-ff7a1fdea8f9/2/4)](https://dev.azure.com/kirkone/KK.AspNetCore.BackgroundTasks.Scheduled/_release?view=all&definitionId=2&_a=releases) |
+| KK.DotNet.BackgroundTasks.Scheduled CD | |
+| Alpha | [![Alpha](https://vsrm.dev.azure.com/kirkone/_apis/public/Release/badge/b1423fc9-d9b5-4555-8599-ff7a1fdea8f9/2/2)](https://dev.azure.com/kirkone/KK.DotNet.BackgroundTasks.Scheduled/_release?view=all&definitionId=2&_a=releases) |
+| Beta | [![Beta](https://vsrm.dev.azure.com/kirkone/_apis/public/Release/badge/b1423fc9-d9b5-4555-8599-ff7a1fdea8f9/2/3)](https://dev.azure.com/kirkone/KK.DotNet.BackgroundTasks.Scheduled/_release?view=all&definitionId=2&_a=releases) |
+| Release | [![Release](https://vsrm.dev.azure.com/kirkone/_apis/public/Release/badge/b1423fc9-d9b5-4555-8599-ff7a1fdea8f9/2/4)](https://dev.azure.com/kirkone/KK.DotNet.BackgroundTasks.Scheduled/_release?view=all&definitionId=2&_a=releases) |
 
 
 ## Authors
@@ -116,7 +116,7 @@ The build environment for this project is on Azure DevOps and can be found here 
 -   **paule96** - _Refactoring and understanding awesome interface stuff_ - [paule96](https://github.com/paule96)
 -   **TiltonJH** - _Unbelievable knowledge about awesome interface stuff_ - [TiltonJH](https://github.com/TiltonJH)
 
-See also the list of [contributors](https://github.com/kirkone/KK.AspNetCore.BackgroundTasks.Scheduled/graphs/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/kirkone/KK.DotNet.BackgroundTasks.Scheduled/graphs/contributors) who participated in this project.
 
 ## License
 

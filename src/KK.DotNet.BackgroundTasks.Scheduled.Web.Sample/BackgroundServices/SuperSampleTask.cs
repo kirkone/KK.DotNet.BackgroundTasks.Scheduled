@@ -1,10 +1,10 @@
-﻿namespace KK.AspNetCore.BackgroundTasks
+﻿namespace KK.DotNet.BackgroundTasks
 {
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Logging;
     using System.Threading;
     using System.Threading.Tasks;
-    using KK.AspNetCore.BackgroundTasks.Scheduled;
+    using KK.DotNet.BackgroundTasks.Scheduled;
 
     public class SuperSampleTask : IScheduledTask
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace KK.AspNetCore.BackgroundTasks.Sample.Models
+namespace KK.DotNet.BackgroundTasks.Sample.Models
 {
     public class ErrorViewModel
     {
