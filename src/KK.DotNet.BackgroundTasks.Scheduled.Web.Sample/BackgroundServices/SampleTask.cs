@@ -15,7 +15,7 @@
             ILogger<SampleTask> logger
         )
         {
-            this.Options = options;           
+            this.Options = options;
             this.logger = logger;
         }
 
@@ -27,12 +27,20 @@
 
             stoppingToken.Register(() => this.logger.LogDebug("Sample Task forced stopping."));
 
-            //while (!stoppingToken.IsCancellationRequested)
-            //{
-            this.logger.LogDebug($"{System.DateTime.Now} Sample Task is running in background");
+            var runCount = 0;
+            while (runCount < 5)
+            {
+                if (stoppingToken.IsCancellationRequested)
+                {
+                    // Task was killed from outside.
+                    this.logger.LogDebug($"{System.DateTime.Now} Sample Task cancellation requested!");
+                    return;
+                }
 
-            // await Task.Delay(1000 * 5, stoppingToken);
-            //}
+                this.logger.LogDebug($"{System.DateTime.Now} Sample Task loop {runCount}");
+                await Task.Delay(1000, stoppingToken);
+                runCount++;
+            }
 
             this.logger.LogDebug("Sample Task is finished");
         }

@@ -37,32 +37,58 @@ namespace KK.DotNet.BackgroundTasks.Sample
 
             // Begin - Scheduled Tast Setup
 
+            // The SchedulerHostedService will be registered automaticly when registering te first task
+            // If you want to use you own implementation you must register it bevore any task.
+            // services.AddSingleton<IHostedService, CustomSchedulerHostedService>();
+
             // Add an configuration object to the DI
-            // The type parameter should be the type of the target task
-            services.AddSingleton<IScheduledTaskOptions<SampleTask>>(
-                new ScheduledTaskOptions<SampleTask>
-                {
-                    // A CronTab expression, see: https://en.wikipedia.org/wiki/Cron
-                    Schedule = "*/10 * * * * *",
-                    // Seconds are only supported when it is set explicit
-                    CronFormat = Cronos.CronFormat.IncludeSeconds
-                }
+            // The type parameter must be the type of the target task
+            // services.AddSingleton<IScheduledTaskOptions<SampleTask>>(
+            //     new ScheduledTaskOptions<SampleTask>()
+            //     {
+            //         // A CronTab expression, see: https://en.wikipedia.org/wiki/Cron
+            //         Schedule = "*/10 * * * * *",
+            //         // Seconds are only supported when it is set explicit
+            //         CronFormat = Cronos.CronFormat.IncludeSeconds
+            //     }
+            // );
+
+            // Or simply use the extension methods
+            // Set options from an object
+            // services.AddScheduledTaskOptions(
+            //     new ScheduledTaskOptions<SampleTask>()
+            //     {
+            //         Schedule = "*/1 * * * *"
+            //     }
+            // );
+
+            // Set options with an action
+            // services.AddScheduledTaskOptions<SampleTask>( options =>
+            //     {
+            //         options.Schedule = "*/1 * * * *";
+            //     }
+            // );
+
+            // Set options from Configuration
+            // services.AddScheduledTaskOptions<SampleTask>(
+            //     Configuration.GetSection("Tasks:Sample")
+            // );
+
+            services.AddScheduledTaskOptions<SampleTask>(
+                Configuration.GetSection("Tasks:Sample")
             );
 
-            services.AddSingleton<IScheduledTaskOptions<SuperSampleTask>>(
-                new ScheduledTaskOptions<SuperSampleTask>
-                {
-                    Schedule = "*/1 * * * *"
-                }
-            );
-            
             // Setup the Task
+            // When options provided elseware simply add the Task
             services.AddScheduledTask<SampleTask>();
-            services.AddScheduledTask<SuperSampleTask>();
 
-            // Setup the Host for the scheduled tasks
-            // without this the tasks will never run.
-            services.AddHostedService<SchedulerHostedService>();
+            // You can also configure the task when adding it
+            services.AddScheduledTask<SuperSampleTask>(options =>
+                {
+                    options.Schedule = "*/10 * * * * *";
+                    options.CronFormat = Cronos.CronFormat.IncludeSeconds;
+                }
+            );
 
             // End - Scheduled Tast Setup
         }
