@@ -9,7 +9,7 @@
     using System.Threading;
     using System.Threading.Tasks;
 
-    public class SchedulerHostedService : BackgroundService
+    public class SchedulerHostedService : BackgroundService, ISchedulerHostedService
     {
         private readonly ILogger logger;
         private Task executingTask;
