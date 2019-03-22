@@ -19,20 +19,7 @@
 
             var options = new ScheduledTaskOptions<TScheduledTask>();
             configuration.Bind(options);
-            services.AddSingleton<IScheduledTaskOptions<TScheduledTask>>(options);
-            return options;
-        }
-
-        public static IScheduledTaskOptions<TScheduledTask> AddScheduledTaskOptions<TScheduledTask>(
-            this IServiceCollection services,
-            IScheduledTaskOptions<TScheduledTask> options
-        )
-            where TScheduledTask : class, IScheduledTask
-        {
-            if (services == null) throw new ArgumentNullException(nameof(services));
-            if (options == null) throw new ArgumentNullException(nameof(options));
-
-            services.AddSingleton<IScheduledTaskOptions<TScheduledTask>>(options);
+            services.AddScheduledTaskOptions(options);
             return options;
         }
 
@@ -47,6 +34,19 @@
 
             var options = new ScheduledTaskOptions<TScheduledTask>();
             configureOptions.Invoke(options);
+            services.AddScheduledTaskOptions(options);
+            return options;
+        }
+
+        public static IScheduledTaskOptions<TScheduledTask> AddScheduledTaskOptions<TScheduledTask>(
+            this IServiceCollection services,
+            IScheduledTaskOptions<TScheduledTask> options
+        )
+            where TScheduledTask : class, IScheduledTask
+        {
+            if (services == null) throw new ArgumentNullException(nameof(services));
+            if (options == null) throw new ArgumentNullException(nameof(options));
+
             services.AddSingleton<IScheduledTaskOptions<TScheduledTask>>(options);
             return options;
         }
@@ -57,20 +57,8 @@
             where TScheduledTask : class, IScheduledTask
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-            return AddService<TScheduledTask>(services);
-        }
 
-        public static IServiceCollection AddScheduledTask<TScheduledTask>(
-            this IServiceCollection services,
-            IScheduledTaskOptions<TScheduledTask> options
-        )
-            where TScheduledTask : class, IScheduledTask
-        {
-            if (services == null) throw new ArgumentNullException(nameof(services));
-            if (options == null) throw new ArgumentNullException(nameof(options));
-
-            services.AddSingleton<IScheduledTaskOptions<TScheduledTask>>(options);
-            return AddService<TScheduledTask>(services);
+            return services.AddService<TScheduledTask>(null);
         }
 
         public static IServiceCollection AddScheduledTask<TScheduledTask>(
@@ -84,16 +72,33 @@
 
             var options = new ScheduledTaskOptions<TScheduledTask>();
             configureOptions.Invoke(options);
-            services.AddSingleton<IScheduledTaskOptions<TScheduledTask>>(options);
-            return AddService<TScheduledTask>(services);
+            return services.AddService<TScheduledTask>(options);
         }
 
-        private static IServiceCollection AddService<TScheduledTask>(
-            IServiceCollection services
+        public static IServiceCollection AddScheduledTask<TScheduledTask>(
+            this IServiceCollection services,
+            IScheduledTaskOptions<TScheduledTask> options
         )
             where TScheduledTask : class, IScheduledTask
         {
-            services.TryAddSingleton<IHostedService, SchedulerHostedService>();
+            if (services == null) throw new ArgumentNullException(nameof(services));
+            if (options == null) throw new ArgumentNullException(nameof(options));
+
+            return services.AddService<TScheduledTask>(options);
+        }
+
+        private static IServiceCollection AddService<TScheduledTask>(
+            this IServiceCollection services,
+            IScheduledTaskOptions<TScheduledTask> options
+        )
+            where TScheduledTask : class, IScheduledTask
+        {
+            if (options != null)
+            {
+                services.AddSingleton<IScheduledTaskOptions<TScheduledTask>>(options);
+            }
+
+            services.TryAddSingleton<ISchedulerHostedService, SchedulerHostedService>();
             return services.AddSingleton<IScheduledTask, TScheduledTask>();
         }
     }
