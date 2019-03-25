@@ -15,7 +15,7 @@
             ILogger<SuperSampleTask> logger
         )
         {
-            this.Options = options;           
+            this.Options = options;
             this.logger = logger;
         }
 
@@ -27,12 +27,22 @@
 
             stoppingToken.Register(() => this.logger.LogDebug("Super Sample Task forced stopping."));
 
-            //while (!stoppingToken.IsCancellationRequested)
-            //{
             this.logger.LogDebug($"{System.DateTime.Now} Super Sample Task is running in background");
 
-            // await Task.Delay(1000 * 5, stoppingToken);
-            //}
+            var runCount = 0;
+            while (runCount < 5)
+            {
+                if (stoppingToken.IsCancellationRequested)
+                {
+                    // Task was killed from outside.
+                    this.logger.LogDebug($"{System.DateTime.Now} Super Sample Task cancellation requested!");
+                    return;
+                }
+
+                this.logger.LogDebug($"{System.DateTime.Now} Super Sample Task loop {runCount}");
+                await Task.Delay(1000, stoppingToken);
+                runCount++;
+            }
 
             this.logger.LogDebug("Super Sample Task is finished");
         }

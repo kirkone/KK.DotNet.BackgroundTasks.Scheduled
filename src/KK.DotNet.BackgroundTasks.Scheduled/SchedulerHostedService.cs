@@ -9,7 +9,7 @@
     using System.Threading;
     using System.Threading.Tasks;
 
-    public class SchedulerHostedService : BackgroundService
+    public class SchedulerHostedService : BackgroundService, ISchedulerHostedService
     {
         private readonly ILogger logger;
         private Task executingTask;
@@ -33,8 +33,8 @@
                 this.scheduledTasks.Add(new SchedulerTask
                 {
                     CronExpression = CronExpression.Parse(
-                        scheduledTask.Options.Schedule,
-                        scheduledTask.Options.CronFormat
+                        expression: scheduledTask.Options.Schedule,
+                        format: scheduledTask.Options.CronFormat
                     ),
                     Task = scheduledTask,
                     NextStartTime = referenceTime
