@@ -1,6 +1,5 @@
 ﻿namespace KK.DotNet.BackgroundTasks.Scheduled
 {
-    using Cronos;
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Logging;
     using System;
@@ -9,36 +8,31 @@
     using System.Threading;
     using System.Threading.Tasks;
 
-    public class SchedulerHostedService : BackgroundService, ISchedulerHostedService
+    internal class SchedulerHostedService : BackgroundService, ISchedulerHostedService
     {
         private readonly ILogger logger;
         private Task executingTask;
-        private CancellationTokenSource cts;
+        private CancellationTokenSource ctsService;
+        private CancellationTokenSource ctsDelay;
 
         public event EventHandler<UnobservedTaskExceptionEventArgs> UnobservedTaskException;
 
-        private readonly List<SchedulerTask> scheduledTasks = new List<SchedulerTask>();
+        private readonly Scheduler scheduler;
 
         public SchedulerHostedService(
             IEnumerable<IScheduledTask> scheduledTasks,
+            Scheduler scheduler,
             ILogger<SchedulerHostedService> logger
         )
         {
             this.logger = logger;
+            this.scheduler = scheduler;
 
-            var referenceTime = DateTime.UtcNow;
+            this.scheduler.TaskAdded += this.InterruptDelay;
 
             foreach (var scheduledTask in scheduledTasks)
             {
-                this.scheduledTasks.Add(new SchedulerTask
-                {
-                    CronExpression = CronExpression.Parse(
-                        expression: scheduledTask.Options.Schedule,
-                        format: scheduledTask.Options.CronFormat
-                    ),
-                    Task = scheduledTask,
-                    NextStartTime = referenceTime
-                });
+                this.scheduler.AddTask(scheduledTask);
             }
         }
 
@@ -47,10 +41,10 @@
             this.logger.LogDebug("Scheduler Hosted Service is starting.");
 
             // Create a linked token so we can trigger cancellation outside of this token's cancellation
-            this.cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+            this.ctsService = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
 
             // Store the task we're executing
-            this.executingTask = this.ExecuteAsync(this.cts.Token);
+            this.executingTask = this.ExecuteAsync(this.ctsService.Token);
 
             // If the task is completed then return it, otherwise it's running
             return this.executingTask.IsCompleted ? this.executingTask : Task.CompletedTask;
@@ -67,10 +61,10 @@
             }
 
             // Signal cancellation to the executing method
-            this.cts.Cancel();
+            this.ctsService.Cancel();
 
             // Wait until the task completes or the stop token triggers
-            await Task.WhenAny(this.executingTask, Task.Delay(-1, cancellationToken));
+            _ = await Task.WhenAny(this.executingTask, Task.Delay(-1, cancellationToken));
 
             // Throw if cancellation triggered
             cancellationToken.ThrowIfCancellationRequested();
@@ -84,21 +78,26 @@
             }
         }
 
+        private void InterruptDelay(object sender, EventArgs e)
+        {
+            this.ctsDelay?.Cancel();
+        }
+
         private async Task ExecuteOnceAsync(CancellationToken cancellationToken)
         {
             var taskFactory = new TaskFactory(TaskScheduler.Current);
-            
+
             // [1] 00:00:00
             // [2] 00:01:01
             var referenceTime = DateTime.UtcNow;
 
-            var tasksThatShouldRun = this.scheduledTasks
+            var tasksThatShouldRun = this.scheduler.Tasks
                 .Where(t => t.ShouldRun(referenceTime))
                 .ToList();
-                
+
             foreach (var taskThatShouldRun in tasksThatShouldRun)
             {
-                await taskFactory.StartNew(
+                _ = await taskFactory.StartNew(
                     async () =>
                     {
                         try
@@ -119,34 +118,49 @@
                         }
                     },
                     cancellationToken);
-                    
-                    // [1] 00:01:00
-                    // [2] 00:02:00
-                    taskThatShouldRun.Increment();
+
+                // [1] 00:01:00
+                // [2] 00:02:00
+                taskThatShouldRun.Increment();
             }
-            
+
             // [1] 00:01:00 < 00:00:00 == false (super)
             // [2] 00:02:00 < 00:01:01 == false (super)
-            var nextTask = this.scheduledTasks
+            var nextTask = this.scheduler.Tasks
                 .Where(t => !t.ShouldRun(referenceTime))
                 .OrderBy(d => d.NextStartTime)
                 .First();
 
             // Important: here we use the nullable value direct because nextTasks contains a NextRunTime.
-            // See the where with the should run above
+            // See the where with the ShouldRun above
             if (nextTask.NextStartTime != null)
             {
-                await Task.Delay(
-                    nextTask.NextStartTime.Value.Subtract(referenceTime),
-                    cancellationToken
-                );
-                // [1] 00:01:00
-                // [2] 00:02:00
+                this.ctsDelay = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+
+
+                try
+                {
+                    await Task.Delay(
+                        nextTask.NextStartTime.Value.Subtract(referenceTime),
+                        this.ctsDelay.Token
+                    );
+                    // [1] 00:01:00
+                    // [2] 00:02:00
+
+                }
+                catch (System.Exception)
+                {
+
+                    throw;
+                }
             }
             else
             {
                 //This code will never be reached.
             }
+
+            this.ctsDelay.Dispose();
+            this.ctsDelay = null;
         }
     }
 }

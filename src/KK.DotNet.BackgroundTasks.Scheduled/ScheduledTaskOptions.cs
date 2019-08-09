@@ -5,6 +5,7 @@
     public class ScheduledTaskOptions<TScheduledTask> : IScheduledTaskOptions<TScheduledTask>
         where TScheduledTask : class, IScheduledTask
     {
+        public string Name { get; set;}
         public string Schedule { get; set;}
         public CronFormat CronFormat { get; set; } = CronFormat.Standard;
     }

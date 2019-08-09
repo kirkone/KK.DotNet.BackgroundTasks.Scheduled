@@ -1,0 +1,20 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>Scheduled Tasks running: @Model.Scheduler.Tasks.Count</p>
+    @foreach (var task in @Model.Scheduler.Tasks)
+    {
+        <p><strong>Name</strong>: @task.Name <br /><strong>NextStartTime</strong>: @task.NextStartTime</p>
+    }
+    <form method="POST">
+        <div>Name: <input asp-for="Options.Name" /></div>
+        <div>Name: <input asp-for="Options.Schedule" /></div>
+        <input value="Add Task" type="submit" />
+    </form>
+</div>

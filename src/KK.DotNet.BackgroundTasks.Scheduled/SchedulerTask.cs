@@ -3,23 +3,24 @@
     using Cronos;
     using System;
 
-    internal class SchedulerTask
+    public class SchedulerTask
     {
-        public CronExpression CronExpression { get; set; }
-        public IScheduledTask Task { get; set; }
 
-        public DateTime? LastStartTime { get; set; }
-        public DateTime? NextStartTime { get; set; }
 
-        public void Increment()
+        public string Name  { get; internal set; }
+        public CronExpression CronExpression { get; internal set; }
+        public IScheduledTask Task { get; internal set; }
+
+        public DateTime? LastStartTime { get; internal set; }
+        public DateTime? NextStartTime { get; internal set; }
+
+        internal void Increment()
         {
             this.LastStartTime = DateTime.UtcNow;
             this.NextStartTime = this.CronExpression.GetNextOccurrence(this.LastStartTime ?? DateTime.Now);
         }
 
-        public bool ShouldRun(DateTime currentTime)
-        {            
-            return this.NextStartTime < currentTime && this.LastStartTime != this.NextStartTime;
-        }
+        internal bool ShouldRun(DateTime currentTime)
+            => this.NextStartTime < currentTime && this.LastStartTime != this.NextStartTime;
     }
 }
