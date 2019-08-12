@@ -19,8 +19,8 @@ variables:
   BuildConfiguration: "Release"
   Project: "$(Build.SourcesDirectory)/src/KK.DotNet.BackgroundTasks.Scheduled/KK.DotNet.BackgroundTasks.Scheduled.csproj"
   ProjectFolder: "$(Build.SourcesDirectory)/src/KK.DotNet.BackgroundTasks.Scheduled"
-  DotNetVersion: "2.2.105"
-  GitVersion: "4.0.1-beta1-62"
+  DotNetVersion: "2.2.401"
+  GitVersion: "5.0.1"
 
 name: $(Year:yy)$(DayOfYear)$(Rev:rr)
 
