@@ -4,8 +4,6 @@ This project contains the code for the NuGet Package to get scheduled tasks in a
 
 ## Usage
 
-> **INFO**: For detailed usage information please have a look in the `KK.DotNet.BackgroundTasks.Scheduled.Web.Sample` project.
-
 ### Task
 
 You can add multiple tasks in your projekt. The task has to implement the `IScheduledTask` interface.  
@@ -70,12 +68,29 @@ services.AddSingleton<IScheduledTaskOptions<SampleTask>>(
 
 ### SchedulerHost
 
-**After** the registration of all your tasks there is only one thing left to do.  
-Register the `SchedulerHostedService` like so:
+After the registration of all your tasks there is only one thing left to do.  
+Register the `SchedulerHostedService` in your `Startup.cs` like so:
 
 ```C#
-services.AddHostedService<SchedulerHostedService>();
+services.AddScheduler();
 ```
+
+If a custom implemented scheduler should be used, use this kind of registration:
+
+```C#
+services.AddHostedService<CustomSchedulerHostedService>();
+```
+
+`CustomSchedulerHostedService` must implement `ISchedulerHostedService`.
+
+### Scheduler
+
+When using the default SchedulerHostedService than there is also a `Scheduler`.  
+This can be used to get access to the scheduled task list for example.
+
+### Sample
+
+You can find a sample how to get this working in the `samples` folder. Please have a look there and read the comments.
 
 ## NuGet
 

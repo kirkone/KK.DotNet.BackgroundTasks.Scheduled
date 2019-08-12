@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/src/KK.DotNet.BackgroundTasks.Scheduled.Web.Sample/KK.DotNet.BackgroundTasks.Scheduled.Web.Sample.csproj"
+                "${workspaceFolder}/samples/KK.DotNet.BackgroundTasks.Scheduled.Sample.Web/KK.DotNet.BackgroundTasks.Scheduled.Sample.Web.csproj"
             ],
             "problemMatcher": "$msCompile","group": {
                 "kind": "build",
