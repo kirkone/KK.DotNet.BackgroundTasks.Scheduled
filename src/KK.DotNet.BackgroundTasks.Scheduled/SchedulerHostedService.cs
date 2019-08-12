@@ -78,10 +78,7 @@
             }
         }
 
-        private void InterruptDelay(object sender, EventArgs e)
-        {
-            this.ctsDelay?.Cancel();
-        }
+        private void InterruptDelay(object sender, EventArgs e) => this.ctsDelay?.Cancel();
 
         private async Task ExecuteOnceAsync(CancellationToken cancellationToken)
         {
@@ -100,6 +97,7 @@
                 _ = await taskFactory.StartNew(
                     async () =>
                     {
+                        Thread.CurrentThread.Name = taskThatShouldRun.Name;
                         try
                         {
                             await taskThatShouldRun.Task.ExecuteAsync(cancellationToken);
@@ -118,7 +116,6 @@
                         }
                     },
                     cancellationToken);
-
                 // [1] 00:01:00
                 // [2] 00:02:00
                 taskThatShouldRun.Increment();
@@ -137,7 +134,6 @@
             {
                 this.ctsDelay = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
 
-
                 try
                 {
                     await Task.Delay(
@@ -148,10 +144,9 @@
                     // [2] 00:02:00
 
                 }
-                catch (System.Exception)
+                catch (OperationCanceledException)
                 {
-
-                    throw;
+                    this.logger.LogDebug("Task delay interrupted on purpose.");
                 }
             }
             else

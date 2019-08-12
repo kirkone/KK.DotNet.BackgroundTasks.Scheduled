@@ -12,7 +12,9 @@
 
         public Scheduler Scheduler { get; }
 
-        public ScheduledTaskOptions<RuntimeSampleTask> Options { get; }
+
+        [BindProperty]
+        public ScheduledTaskOptions<RuntimeSampleTask> Options { get; set; }
 
         // When using the default SchedulerHostedService than there is also a Scheduler
         // this can be used to get access to the scheduled task list for example

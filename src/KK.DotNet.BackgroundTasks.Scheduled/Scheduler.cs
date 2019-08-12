@@ -23,20 +23,39 @@
         {
             var taskName = string.IsNullOrWhiteSpace(scheduledTask.Options.Name) ? Guid.NewGuid().ToString() : scheduledTask.Options.Name;
 
-            this.logger.LogDebug($"Adding Task: {scheduledTask.Options.Name}");
+            this.logger.LogDebug($"Adding Task: {taskName}");
 
-            this.schedulerTasks.Add(new SchedulerTask
+            CronExpression cronExpression = null;
+            try
             {
-                Name = taskName,
-                CronExpression = CronExpression.Parse(
+                cronExpression = CronExpression.Parse(
                     expression: scheduledTask.Options.Schedule,
                     format: scheduledTask.Options.CronFormat
-                ),
-                Task = scheduledTask,
-                NextStartTime = DateTime.UtcNow
-            });
+            );
+            }
+            catch (CronFormatException ex)
+            {
+                this.logger.LogError(ex, $"Invalid Cron Expression: {scheduledTask.Options.Schedule}");
+            }
 
-            this.OnTaskAdded();
+            if (cronExpression != null)
+            {
+                this.schedulerTasks.Add(new SchedulerTask
+                {
+                    Name = taskName,
+                    CronExpression = cronExpression,
+                    Task = scheduledTask,
+                    NextStartTime = DateTime.UtcNow
+                });
+
+                this.logger.LogDebug($"Task Added: {taskName}");
+
+                this.OnTaskAdded();
+            }
+            else
+            {
+                this.logger.LogWarning($"Skipped invalid Task: {taskName}");
+            }
         }
     }
 }
