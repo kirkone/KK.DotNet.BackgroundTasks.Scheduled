@@ -4,7 +4,7 @@ This project contains the code for the NuGet Package to get scheduled tasks in a
 
 ## Usage
 
-> **INFO**: For detailed usage information please have a look in the `KK.DotNet.BackgroundTasks.Scheduled.Web.Sample` project.
+> **INFO**: For detailed usage information please have a look in the [`KK.DotNet.BackgroundTasks.Scheduled.Web.Sample`](https://github.com/kirkone/KK.DotNet.BackgroundTasks.Scheduled/tree/master/src/KK.DotNet.BackgroundTasks.Scheduled.Web.Sample) project.
 
 ### Task
 
