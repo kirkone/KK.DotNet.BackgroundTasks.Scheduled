@@ -4,7 +4,7 @@ This project contains the code for the NuGet Package to get scheduled tasks in a
 
 ## Usage
 
-> **INFO**: For detailed usage information please have a look in the `KK.DotNet.BackgroundTasks.Scheduled.Web.Sample` project.
+> **INFO**: For detailed usage information please have a look in the [`KK.DotNet.BackgroundTasks.Scheduled.Web.Sample`](https://github.com/kirkone/KK.DotNet.BackgroundTasks.Scheduled/tree/master/src/KK.DotNet.BackgroundTasks.Scheduled.Web.Sample) project.
 
 ### Task
 
@@ -32,6 +32,8 @@ public class SampleTask : IScheduledTask
 ```
 
 > **INFO** You shoud use the provided `CancellationToken` in your code to support cancelling of your task.
+
+> **TIPP** If you want to use Scoped Services inside have a look here: https://stackoverflow.com/a/58989132/9277073
 
 You have to register the task in your `public void ConfigureServices` of the `Startup.cs`. You can use the provided `AddScheduledTask` Method:
 
