@@ -33,6 +33,8 @@ public class SampleTask : IScheduledTask
 
 > **INFO** You shoud use the provided `CancellationToken` in your code to support cancelling of your task.
 
+> **TIPP** If you want to use Scoped Services inside have a look here: https://stackoverflow.com/a/58989132/9277073
+
 You have to register the task in your `public void ConfigureServices` of the `Startup.cs`. You can use the provided `AddScheduledTask` Method:
 
 ```C#
